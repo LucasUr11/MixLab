@@ -1,0 +1,1 @@
+Gestión de estados, Zustand o Context API.-
