@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { fetchRandomCocktail } from '../../api/cocktailApi';
 import { type Cocktail } from '../../types/cocktail';
 import { useMixStore } from '../../store/useMixStore';
+import { useRef } from 'react';
 
 const Hero = () => {
 
@@ -13,9 +14,17 @@ const Hero = () => {
   const [featuredCocktail, setFeaturedCocktail] = useState<Cocktail | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { dailyCocktail, fetchDaily } = useMixStore();
+  const { fetchDaily } = useMixStore();
+
+  const isFetched = useRef(false);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
+    // Una vez ejecutado, no se vuelve a ejecutar.-
+    if (isFetched.current) return;
+    isFetched.current = true;
+
     const getHeroDrink = async () => {
       try {
         const drink = await fetchRandomCocktail();
@@ -42,7 +51,7 @@ const Hero = () => {
 
   useEffect(() => {
     fetchDaily();
-  }, [dailyCocktail]);
+  }, []);
 
   return (
     <section className="relative w-full min-h-[70vh] flex flex-col items-center justify-center px-6 py-20 overflow-hidden bg-slate-950">
@@ -110,7 +119,11 @@ const Hero = () => {
                   <img
                     src={featuredCocktail.image}
                     alt={featuredCocktail.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    onLoad={() => setImageLoaded(true)}
+                    className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700
+                      ${imageLoaded ? 'opacity-100' : 'opacity-0'}
+                    `}
+      
                   />
                 </div>
 
