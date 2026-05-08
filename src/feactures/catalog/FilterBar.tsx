@@ -52,7 +52,7 @@ const FilterBar = () => {
 
     return (
         <div className="w-full py-8 overflow-x-auto no-scrollbar">
-            <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-4">
+            <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-4 flex-wrap">
                 {filters.map((filter) => (
                     <motion.button
                         key={filter.id}
