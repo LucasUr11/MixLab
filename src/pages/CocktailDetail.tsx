@@ -65,17 +65,20 @@ const CocktailDetail = () => {
                             transition={{ delay: 0.4 }}
                         >
                             <span className="text-amber-500 font-medium tracking-tighter uppercase text-sm">{cocktail.category}</span>
-                            <h1 className="text-5xl md:text-6xl font-serif text-white mb-6 leading-tight">
-                                {cocktail.name}
-                            </h1>
-                            <button
-                                onClick={() => toggleFavorite(cocktail)}
-                                className={`p-4 mb-4 rounded-full border transition-all duration-300 cursor-pointer ${fav
-                                    ? 'bg-amber border-amber-500 text-amber-500'
-                                    : 'bg-transparent border-slate-700 text-white hover:border-amber-500'
-                                    }`}>
-                                <Heart fill={fav ? "currentColor" : "none"} size={24} />
-                            </button>
+                            <div className="flex justify-between">
+                                <h1 className="text-5xl font-serif text-white leading-tight">
+                                    {cocktail.name}
+                                </h1>
+                                <button
+                                    onClick={() => toggleFavorite(cocktail)}
+                                    className={`px-4 rounded-full border transition-all duration-300 cursor-pointer
+                                        ${fav
+                                            ? 'bg-amber border-amber-500 text-amber-500'
+                                            : 'bg-transparent border-slate-700 text-white hover:border-amber-500'
+                                        }`}>
+                                    <Heart fill={fav ? "currentColor" : "none"} size={24} />
+                                </button>
+                            </div>
                         </motion.div>
 
                         {/* Ingredientes */}
